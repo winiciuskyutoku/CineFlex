@@ -1,47 +1,57 @@
 import styled from "styled-components"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
-export default function SessionsPage() {
+export default function SessionsPage({ movieId }) {
+    const url = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${movieId}/showtimes`
 
-    return (
-        <PageContainer>
-            Selecione o horário
-            <div>
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
+    const [movieSession, setMovieSession] = useState(null)
 
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
+    useEffect(() => {
+        const promise = axios.get(url)
 
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
-            </div>
+        promise.then((sucess) => setMovieSession(sucess.data))
+        promise.catch((fail) => console.log(fail.responde.data))
+    }, [])
 
-            <FooterContainer>
+    console.log(movieSession)
+
+    if(movieSession !== null){
+        return (
+            <PageContainer>
+                Selecione o horário
                 <div>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster" />
+                    {movieSession.days.map(movie => {
+                        return (
+                            <SessionContainer>
+                                {movie.weekday} - {movie.date}
+                                <ButtonsContainer>
+                                    {movie.showtimes.map((showtimes) => <button>{showtimes.name}</button>)}
+                                </ButtonsContainer>
+                            </SessionContainer>
+                        )
+                    })}
+    
                 </div>
-                <div>
-                    <p>Tudo em todo lugar ao mesmo tempo</p>
-                </div>
-            </FooterContainer>
-
-        </PageContainer>
-    )
+    
+                <FooterContainer>
+                    <div>
+                        <img src={movieSession.posterURL} alt={movieSession.title} />
+                    </div>
+                    <div>
+                        <p>{movieSession.title}</p>
+                    </div>
+                </FooterContainer>
+    
+            </PageContainer>
+        )
+    } else {
+        return (
+            <PageContainer>
+                Caregando...
+            </PageContainer>
+        )
+    }
 }
 
 const PageContainer = styled.div`

@@ -1,26 +1,45 @@
 import styled from "styled-components"
+import axios from "axios"
+import { useEffect, useState} from "react"
+import Movie from "../../components/Movie"
 
-export default function HomePage() {
+
+export default function HomePage({setMovieId}) {
+    const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
+
+    const [movies, setMovies] = useState(null)
+
+    useEffect(() => {
+        const promise = axios.get(url)
+
+        promise.then((sucess) => setMovies(sucess.data))
+        promise.catch((fail) => console.log(fail.responde.data))
+    }, [])
+
+    //console.log(movies)
+
+    if(movies == null){
+        return (
+            <PageContainer>
+                <p>
+                    Carregando....
+                </p>
+            </PageContainer>
+        )
+    }
+
     return (
         <PageContainer>
             Selecione o filme
 
             <ListContainer>
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
+                {movies.map(movie => {
+                    return (
+                        <MovieContainer key={movie.id}>
+                            <Movie key={movie.id} img={movie.posterURL} alt={movie.title} id={movie.id} setMovieId={setMovieId}/>
+                        </MovieContainer>
+                    )
+                })}
             </ListContainer>
 
         </PageContainer>
