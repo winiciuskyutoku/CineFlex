@@ -10,6 +10,7 @@ import { useState } from "react"
 export default function App() {
 
     const [movieId, setMovieId] = useState("")
+    const [seatId, setSeatId] = useState(null)
 
     console.log(movieId)
 
@@ -19,8 +20,8 @@ export default function App() {
                <NavContainer>CINEFLEX</NavContainer>
                 <Routes>
                     <Route path="/" element={<HomePage setMovieId={setMovieId}/>}/>
-                    <Route path={"/assentos/"} element={<SeatsPage />}/>
-                    <Route path={`/sessoes/${movieId}`} element={<SessionsPage movieId={movieId}/>}/>
+                    <Route path={`/assentos/${seatId}`} element={<SeatsPage />}/>
+                    <Route path={`/sessoes/${movieId}`} element={<SessionsPage movieId={movieId} setSeatId={setSeatId}/>}/>
                     <Route path="/sucess" element={<SuccessPage />}/>
                 </Routes>
            </BrowserRouter>

@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import SessionButton from "../../components/SessionButton"
 
-export default function SessionsPage({ movieId }) {
+export default function SessionsPage({ movieId, setSeatId }) {
     const url = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${movieId}/showtimes`
 
     const [movieSession, setMovieSession] = useState(null)
@@ -26,7 +27,7 @@ export default function SessionsPage({ movieId }) {
                             <SessionContainer>
                                 {movie.weekday} - {movie.date}
                                 <ButtonsContainer>
-                                    {movie.showtimes.map((showtimes) => <button>{showtimes.name}</button>)}
+                                    {movie.showtimes.map((showtimes) => <SessionButton hour={showtimes.name} id={showtimes.id} setSeatId={setSeatId}/>)}
                                 </ButtonsContainer>
                             </SessionContainer>
                         )
