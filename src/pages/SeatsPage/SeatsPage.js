@@ -81,7 +81,7 @@ export default function SeatsPage({setSeatName, seatName, name, setName, cpf, se
                     </div>
                     <div>
                         <p>{seats.movie.title}</p>
-                        <p>{seats.day.weekday} - {seats.day.date}</p>
+                        <p>{seats.day.weekday} - {seats.name}</p>
                     </div>
                 </FooterContainer>
     

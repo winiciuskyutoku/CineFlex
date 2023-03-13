@@ -6,6 +6,10 @@ export default function Seat({name, avaible, setIds, ids, id, sName, setSeatName
 
     function selectChair(e, nameSeat){ 
 
+        if(e === "error" && nameSeat === "error"){
+            return alert("Esse assento não está disponível")
+        }
+
         {selected === false ? isSelected(true) : isSelected(false)}
         
         if(!ids.includes(e)){
@@ -23,12 +27,13 @@ export default function Seat({name, avaible, setIds, ids, id, sName, setSeatName
                 }
             })
         }
+
+        console.log(ids)
     }
 
-    console.log(seatName)
 
     return(
-        <SeatItem data-test="seat" avaible={avaible} selected={selected} onClick={avaible === true ? () => selectChair(id, sName) : null}>{name}</SeatItem>
+        <SeatItem data-test="seat" avaible={avaible} selected={selected} onClick={avaible === true ? () => selectChair(id, sName) : () => selectChair("error", "error")}>{name}</SeatItem>
     )
 }
 
@@ -48,5 +53,5 @@ const SeatItem = styled.div`
     align-items: center;
     justify-content: center;
     margin: 5px 3px;
-    cursor: ${(props) => props.avaible === true && "pointer"}
+    cursor: pointer;
 `
