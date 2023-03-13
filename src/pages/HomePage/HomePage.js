@@ -4,7 +4,7 @@ import { useEffect, useState} from "react"
 import Movie from "../../components/Movie"
 
 
-export default function HomePage({setMovieId}) {
+export default function HomePage({setMovieId, setMovieTitle}) {
     const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
 
     const [movies, setMovies] = useState(null)
@@ -36,7 +36,7 @@ export default function HomePage({setMovieId}) {
                 {movies.map(movie => {
                     return (
                         <MovieContainer key={movie.id}>
-                            <Movie key={movie.id} img={movie.posterURL} alt={movie.title} id={movie.id} setMovieId={setMovieId}/>
+                            <Movie key={movie.id} img={movie.posterURL} alt={movie.title} id={movie.id} setMovieId={setMovieId} setMovieTitle={setMovieTitle}/>
                         </MovieContainer>
                     )
                 })}

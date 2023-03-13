@@ -6,12 +6,10 @@ import Seat from "../../components/Seat"
 import {useParams, useNavigate} from "react-router-dom"
 
 
-export default function SeatsPage({seatId}) {
+export default function SeatsPage({setSeatName, seatName, name, setName, cpf, setCpf}) {
 
     const [seats, setSeats] = useState(null)
     const [ids, setIds] = useState([])
-    const [name, setName] = useState("")
-    const [cpf, setCpf] = useState("")
 
     const {idSection} = useParams()
     const navigate = useNavigate()
@@ -35,9 +33,13 @@ export default function SeatsPage({seatId}) {
         const url = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
         const promise = axios.post(url, body)
 
-        promise.then(() => navigate("/sucess"))
+        promise.then(() => {
+            navigate("/sucess")
+        })
         promise.catch((fail) => console.log(fail))
     }
+
+    console.log(ids)
 
     if(seats !== null){
         return (
@@ -45,7 +47,7 @@ export default function SeatsPage({seatId}) {
                 Selecione o(s) assento(s)
     
                 <SeatsContainer>
-                    {seats.seats.map((seatNum) => <Seat id={seatNum.id} avaible={seatNum.isAvailable} name={seatNum.name} key={seatNum.id} setIds={setIds} ids={ids}/>)}
+                    {seats.seats.map((seatNum) => <Seat id={seatNum.id} avaible={seatNum.isAvailable} name={seatNum.name} key={seatNum.id} setIds={setIds} ids={ids} sName={seatNum.name} setSeatName={setSeatName} seatName={seatName}/>)}
                 </SeatsContainer>
     
                 <CaptionContainer>

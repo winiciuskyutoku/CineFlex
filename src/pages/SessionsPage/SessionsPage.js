@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import SessionButton from "../../components/SessionButton"
 import {useParams} from "react-router-dom"
 
-export default function SessionsPage({ movieId, setSeatId }) {
+export default function SessionsPage({setSeatId, setMovieDate, setMovieHour}) {
     
 
     const [movieSession, setMovieSession] = useState(null)
@@ -20,8 +20,6 @@ export default function SessionsPage({ movieId, setSeatId }) {
         promise.catch((fail) => console.log(fail.responde.data))
     }, [])
 
-    console.log(movieSession)
-
     if(movieSession !== null){
         return (
             <PageContainer>
@@ -32,7 +30,7 @@ export default function SessionsPage({ movieId, setSeatId }) {
                             <SessionContainer key={movie.id}>
                                 {movie.weekday} - {movie.date}
                                 <ButtonsContainer key={movie.id}>
-                                    {movie.showtimes.map((showtimes) => <SessionButton key={showtimes.id} hour={showtimes.name} id={showtimes.id} setSeatId={setSeatId}/>)}
+                                    {movie.showtimes.map((showtimes) => <SessionButton key={showtimes.id} hour={showtimes.name} id={showtimes.id} setSeatId={setSeatId} date={movie.date} setMovieDate={setMovieDate} setMovieHour={setMovieHour}/>)}
                                 </ButtonsContainer>
                             </SessionContainer>
                         )
