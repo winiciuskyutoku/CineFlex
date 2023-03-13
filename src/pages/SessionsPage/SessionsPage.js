@@ -27,7 +27,7 @@ export default function SessionsPage({setSeatId, setMovieDate, setMovieHour}) {
                 <div>
                     {movieSession.days.map(movie => {
                         return (
-                            <SessionContainer key={movie.id}>
+                            <SessionContainer key={movie.id} data-test="movie-day">
                                 {movie.weekday} - {movie.date}
                                 <ButtonsContainer key={movie.id}>
                                     {movie.showtimes.map((showtimes) => <SessionButton key={showtimes.id} hour={showtimes.name} id={showtimes.id} setSeatId={setSeatId} date={movie.date} setMovieDate={setMovieDate} setMovieHour={setMovieHour}/>)}
@@ -38,7 +38,7 @@ export default function SessionsPage({setSeatId, setMovieDate, setMovieHour}) {
     
                 </div>
     
-                <FooterContainer>
+                <FooterContainer data-test="footer">
                     <div>
                         <img src={movieSession.posterURL} alt={movieSession.title} />
                     </div>

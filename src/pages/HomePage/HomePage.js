@@ -35,7 +35,7 @@ export default function HomePage({setMovieId, setMovieTitle}) {
             <ListContainer>
                 {movies.map(movie => {
                     return (
-                        <MovieContainer key={movie.id}>
+                        <MovieContainer key={movie.id} data-test="movie">
                             <Movie key={movie.id} img={movie.posterURL} alt={movie.title} id={movie.id} setMovieId={setMovieId} setMovieTitle={setMovieTitle}/>
                         </MovieContainer>
                     )

@@ -28,7 +28,7 @@ export default function Seat({name, avaible, setIds, ids, id, sName, setSeatName
     console.log(seatName)
 
     return(
-        <SeatItem avaible={avaible} selected={selected} onClick={avaible === true ? () => selectChair(id, sName) : null}>{name}</SeatItem>
+        <SeatItem data-test="seat" avaible={avaible} selected={selected} onClick={avaible === true ? () => selectChair(id, sName) : null}>{name}</SeatItem>
     )
 }
 

@@ -8,7 +8,7 @@ export default function SessionButton({hour, id, setSeatId, date, setMovieHour, 
                 setSeatId(id)
                 setMovieHour(hour)
                 setMovieDate(date)
-            }}>{hour}</button>
+            }} data-test="showtime">{hour}</button>
         </Link>
     )
 }

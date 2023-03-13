@@ -68,14 +68,14 @@ export default function SeatsPage({setSeatName, seatName, name, setName, cpf, se
                 <FormContainer>
                     <form onSubmit={reserveSeat}>
                         <Title htmlFor="name">Nome do Comprador:</Title>
-                        <input id="name" type="text" required placeholder="Digite seu nome..." value={name} onChange={(e) => setName(e.target.value)}/>
+                        <input data-test="client-name" id="name" type="text" required placeholder="Digite seu nome..." value={name} onChange={(e) => setName(e.target.value)}/>
                         <Title htmlFor="cpf">CPF do Comprador:</Title>
-                        <input id="cpf" type="text" pattern="\d{3}\.?\d{3}\.?\d{3}\.?\d{2}" required placeholder="Digite seu CPF..." value={cpf} onChange={(e) => setCpf(e.target.value)}/>
-                        <button type="submit">Reservar Assento(s)</button>
+                        <input data-test="client-cpf" id="cpf" type="text" pattern="\d{3}\.?\d{3}\.?\d{3}\.?\d{2}" required placeholder="Digite seu CPF..." value={cpf} onChange={(e) => setCpf(e.target.value)}/>
+                        <button data-test="book-seat-btn" type="submit">Reservar Assento(s)</button>
                     </form>
                 </FormContainer>
     
-                <FooterContainer>
+                <FooterContainer data-test="footer">
                     <div>
                         <img src={seats.movie.posterURL} alt={seats.movie.title} />
                     </div>
